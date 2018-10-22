@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -32,6 +34,26 @@ public class Practice07ColorMatrixColorFilterView extends View {
 
         // 使用 setColorFilter() 设置一个 ColorMatrixColorFilter
         // 用 ColorMatrixColorFilter.setSaturation() 把饱和度去掉
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(0);
+        ColorMatrixColorFilter colorMatrixColorFilter = new ColorMatrixColorFilter(colorMatrix);
+        paint.setColorFilter(colorMatrixColorFilter);
+
+        /**
+         * [ a, b, c, d, e,
+         *   f, g, h, i, j,
+         *   k, l, m, n, o,
+         *   p, q, r, s, t ]
+         *
+         * R’ = a*R + b*G + c*B + d*A + e;
+         * G’ = f*R + g*G + h*B + i*A + j;
+         * B’ = k*R + l*G + m*B + n*A + o;
+         * A’ = p*R + q*G + r*B + s*A + t;
+         */
+
+        /**
+         * https://github.com/chengdazhi/StyleImageView/
+         */
     }
 
     @Override

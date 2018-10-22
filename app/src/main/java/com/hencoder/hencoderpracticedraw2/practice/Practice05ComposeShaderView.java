@@ -1,33 +1,52 @@
 package com.hencoder.hencoderpracticedraw2.practice;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.ComposeShader;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.Shader;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.hencoder.hencoderpracticedraw2.R;
 
 public class Practice05ComposeShaderView extends View {
     Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     public Practice05ComposeShaderView(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public Practice05ComposeShaderView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public Practice05ComposeShaderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
     }
 
-    {
-        setLayerType(LAYER_TYPE_SOFTWARE, null); // 硬件加速下 ComposeShader 不能使用两个同类型的 Shader
+    private void init() {
+        /**
+         * 硬件加速下 ComposeShader 不能使用两个同类型的 Shader
+         */
+        setLayerType(LAYER_TYPE_SOFTWARE, null);// 关闭硬件加速
 
-        // 用 Paint.setShader(shader) 设置一个 ComposeShader
         // Shader 1: BitmapShader 图片：R.drawable.batman
+        Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.batman);
+        BitmapShader bitmapShader1 = new BitmapShader(bitmap1, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
         // Shader 2: BitmapShader 图片：R.drawable.batman_logo
+        Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.batman_logo);
+        BitmapShader bitmapShader2 = new BitmapShader(bitmap2, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        ComposeShader composeShader = new ComposeShader(bitmapShader1, bitmapShader2, PorterDuff.Mode.DST_IN);
+        // 参数1是DST，参数2是SRC，参数3分为alpha合成（12种）和混合合成（5种）
+        // 用 Paint.setShader(shader) 设置一个 ComposeShader
+        paint.setShader(composeShader);
     }
 
     @Override

@@ -13,6 +13,9 @@ import android.view.Menu;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <url>https://zhuanlan.zhihu.com/p/27919855</url>
+ */
 public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager pager;
@@ -72,9 +75,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class PageModel {
-        @LayoutRes int sampleLayoutRes;
-        @StringRes int titleRes;
-        @LayoutRes int practiceLayoutRes;
+        @LayoutRes
+        int sampleLayoutRes;
+        @StringRes
+        int titleRes;
+        @LayoutRes
+        int practiceLayoutRes;
 
         PageModel(@LayoutRes int sampleLayoutRes, @StringRes int titleRes, @LayoutRes int practiceLayoutRes) {
             this.sampleLayoutRes = sampleLayoutRes;

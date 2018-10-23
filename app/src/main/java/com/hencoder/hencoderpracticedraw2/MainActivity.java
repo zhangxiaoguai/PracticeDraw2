@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * <url>https://zhuanlan.zhihu.com/p/27919855</url>
+ * <p>paint详解</p>
  */
 public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
